@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//lidl-calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Lidl GB flavour
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-sol-and-mar/a10096218@lidl-calendar
+DTSTAMP:20261003T191304Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20261001
+SUMMARY:Sol and Mar
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-sol-and-mar/a10096218
+URL:https://www.lidl.co.uk/c/flavour-of-the-week-sol-and-mar/a10096218
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298@lidl-calendar
+DTSTAMP:20261003T191304Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261015
+SUMMARY:The Alps
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298
+URL:https://www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298
+END:VEVENT
+END:VCALENDAR
