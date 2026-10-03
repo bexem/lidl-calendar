@@ -1,0 +1,133 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//lidl-calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Lidl GB all
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-sol-and-mar/a10096218@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20261001
+SUMMARY:Flavour of the Week Sol and Mar
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-sol-and-mar/a10096218
+URL:https://www.lidl.co.uk/c/flavour-of-the-week-sol-and-mar/a10096218
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/indoor-outdoor-plants/a10088634@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261008
+SUMMARY:Indoor & Outdoor Plants
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-outdoor-plants/a10088634
+URL:https://www.lidl.co.uk/c/indoor-outdoor-plants/a10088634
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/pick-of-the-week/a10103836@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261008
+SUMMARY:Pick of the Week
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/pick-of-the-week/a10103836
+URL:https://www.lidl.co.uk/c/pick-of-the-week/a10103836
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/health-wellness/a10096315@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261008
+SUMMARY:Health & Wellness
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/health-wellness/a10096315
+URL:https://www.lidl.co.uk/c/health-wellness/a10096315
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/halloween-costumes-and-decorations/a10029765@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261008
+SUMMARY:Halloween Costumes and Decorations
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/halloween-costumes-and-decorations/a10029765
+URL:https://www.lidl.co.uk/c/halloween-costumes-and-decorations/a10029765
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/kitchen-and-household/a10087763@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261008
+SUMMARY:Kitchen and Household
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/kitchen-and-household/a10087763
+URL:https://www.lidl.co.uk/c/kitchen-and-household/a10087763
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/halloween-party-food-and-sweets/a10030004@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261008
+SUMMARY:Halloween Party Food and Sweets
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/halloween-party-food-and-sweets/a10030004
+URL:https://www.lidl.co.uk/c/halloween-party-food-and-sweets/a10030004
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/fashion/a10096351@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261011
+SUMMARY:Autumn Fashion
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/fashion/a10096351
+URL:https://www.lidl.co.uk/c/fashion/a10096351
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/diy/a10097234@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261011
+SUMMARY:DIY
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/diy/a10097234
+URL:https://www.lidl.co.uk/c/diy/a10097234
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/wooden-toys/a10097673@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261015
+SUMMARY:Wooden Toys
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/wooden-toys/a10097673
+URL:https://www.lidl.co.uk/c/wooden-toys/a10097673
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/pick-of-the-week/a10104278@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261015
+SUMMARY:Pick of the Week
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/pick-of-the-week/a10104278
+URL:https://www.lidl.co.uk/c/pick-of-the-week/a10104278
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261015
+SUMMARY:Flavour of the Week: The Alps
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298
+URL:https://www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/indoor-and-outdoor-plants/a10103831@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261015
+SUMMARY:Indoor and Outdoor Plants
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10103831
+URL:https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10103831
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/silvercrest-kitchen/a10103722@lidl-calendar
+DTSTAMP:20261003T110914Z
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261018
+SUMMARY:Silvercrest
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/silvercrest-kitchen/a10103722
+URL:https://www.lidl.co.uk/c/silvercrest-kitchen/a10103722
+END:VEVENT
+END:VCALENDAR
