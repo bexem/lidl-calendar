@@ -11,9 +11,15 @@ files you can subscribe to.
 
 | Calendar | URL |
 |---|---|
+| **Flavour of the Week only** | `https://raw.githubusercontent.com/bexem/lidl-calendar/main/flavour.ics` |
 | Everything | `https://raw.githubusercontent.com/bexem/lidl-calendar/main/all.ics` |
 | Food only | `https://raw.githubusercontent.com/bexem/lidl-calendar/main/food.ics` |
 | Non-food only | `https://raw.githubusercontent.com/bexem/lidl-calendar/main/nonfood.ics` |
+
+`flavour.ics` is the narrow one: just the weekly theme, with the
+"Flavour of the Week" prefix removed, so events read `The Alps` rather than
+`Flavour of the Week: The Alps`. The other calendars keep the full Lidl
+titles, where the prefix is what distinguishes one promo from another.
 
 In Google Calendar: **Other calendars → From URL**, paste the link. In Apple
 Calendar: **Add Calendar Subscription**, paste the link. Both accept the plain
