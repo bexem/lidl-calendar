@@ -27,7 +27,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add food.ics nonfood.ics all.ics
+          git add food.ics nonfood.ics all.ics flavour.ics
           if git diff --staged --quiet; then
             echo "No change - offers identical to last week."
             exit 0

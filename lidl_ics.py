@@ -22,6 +22,10 @@ FOOD = re.compile(
     r"flavour|flavor|wine|pick of the week|lidl plus|kitchen|household|"
     r"health|wellness|food|sweet|drink|snack|bakery|fresh", re.I)
 
+# Lidl names this promo inconsistently: "Flavour of the Week: The Alps" and
+# "Flavour of the Week Sol and Mar" both occur, sometimes with stray spaces.
+FLAVOUR = re.compile(r"flavour of the week|flavor of the week", re.I)
+
 # Lidl advertises at most ~8 weeks ahead and leaves stale tiles on the homepage.
 WINDOW_PAST, WINDOW_FUTURE = 21, 60
 UA = "Mozilla/5.0 (compatible; lidl-calendar/1.0; +https://github.com/)"
@@ -125,6 +129,14 @@ def main():
     sets = {"food": [e for e in events if e["food"]],
             "nonfood": [e for e in events if not e["food"]],
             "all": events}
+    # ponytail: flavour.ics drops the "Flavour of the Week" prefix so the
+    # theme reads clean in a calendar ("The Alps", not "Flavour of the Week:
+    # The Alps"). The prefix is kept in food/all, where it is the only thing
+    # distinguishing one Lidl promo from another. Lidl pads some titles
+    # ("The Wine Edit. "), so the result is stripped too.
+    sets["flavour"] = [dict(e, title=re.sub(r"^\s*Flavo[u]?r of the Week\s*:?(\s+|$)",
+                                             "", e["title"], flags=re.I).strip())
+                       for e in events if FLAVOUR.search(e["title"])]
     for name, evs in sets.items():
         if not evs:
             continue

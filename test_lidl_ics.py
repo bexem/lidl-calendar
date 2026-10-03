@@ -4,6 +4,7 @@ The date logic is the one part that can silently produce a wrong year, so it
 gets the coverage. Everything else is a straight scrape.
 """
 import datetime as dt
+import re
 import unittest
 
 from lidl_ics import parse_date
@@ -51,6 +52,30 @@ class TestParseDate(unittest.TestCase):
         # 60 days ahead is included, 61 is not.
         self.assertIsNotNone(parse_date("From Tuesday, 02/12", D(2026, 10, 3)))
         self.assertIsNone(parse_date("From Wednesday, 03/12", D(2026, 10, 3)))
+
+
+class TestFlavourTitles(unittest.TestCase):
+    """Lidl writes this promo two ways; both must reduce to the bare theme."""
+
+    def strip(self, title):
+        return re.sub(r"^\s*Flavo[u]?r of the Week\s*:?(\s+|$)", "", title,
+                      flags=re.I).strip()
+
+    def test_with_colon(self):
+        self.assertEqual(self.strip("Flavour of the Week: The Alps"), "The Alps")
+
+    def test_without_colon(self):
+        self.assertEqual(self.strip("Flavour of the Week Sol and Mar"), "Sol and Mar")
+
+    def test_trailing_space(self):
+        self.assertEqual(self.strip("Flavour of the Week  The Alps "), "The Alps")
+
+    def test_us_spelling(self):
+        self.assertEqual(self.strip("Flavor of the Week: The Alps"), "The Alps")
+
+    def test_non_flavour_untouched(self):
+        for t in ("Pick of the Week", "The Wine Edit.", "Wooden Toys"):
+            self.assertEqual(self.strip(t), t)
 
 
 if __name__ == "__main__":
