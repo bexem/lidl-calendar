@@ -5,53 +5,17 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Lidl GB nonfood
 BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/indoor-outdoor-plants/a10088634@lidl-calendar
-DTSTAMP:20261003T191304Z
+UID:https%3A//www.lidl.co.uk/c/halloween-pumpkins/a10030005@lidl-calendar
+DTSTAMP:20261008T144547Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261008
-SUMMARY:Indoor & Outdoor Plants
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-outdoor-plants/a10088634
-URL:https://www.lidl.co.uk/c/indoor-outdoor-plants/a10088634
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/halloween-costumes-and-decorations/a10029765@lidl-calendar
-DTSTAMP:20261003T191304Z
-DTSTART;VALUE=DATE:20261001
-DTEND;VALUE=DATE:20261008
-SUMMARY:Halloween Costumes and Decorations
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/halloween-costumes-and-decorations/a10029765
-URL:https://www.lidl.co.uk/c/halloween-costumes-and-decorations/a10029765
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/fashion/a10096351@lidl-calendar
-DTSTAMP:20261003T191304Z
-DTSTART;VALUE=DATE:20261004
-DTEND;VALUE=DATE:20261011
-SUMMARY:Autumn Fashion
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/fashion/a10096351
-URL:https://www.lidl.co.uk/c/fashion/a10096351
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/diy/a10097234@lidl-calendar
-DTSTAMP:20261003T191304Z
-DTSTART;VALUE=DATE:20261004
-DTEND;VALUE=DATE:20261011
-SUMMARY:DIY
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/diy/a10097234
-URL:https://www.lidl.co.uk/c/diy/a10097234
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/wooden-toys/a10097673@lidl-calendar
-DTSTAMP:20261003T191304Z
-DTSTART;VALUE=DATE:20261008
-DTEND;VALUE=DATE:20261015
-SUMMARY:Wooden Toys
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/wooden-toys/a10097673
-URL:https://www.lidl.co.uk/c/wooden-toys/a10097673
+SUMMARY:Halloween Pumpkins
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/halloween-pumpkins/a10030005
+URL:https://www.lidl.co.uk/c/halloween-pumpkins/a10030005
 END:VEVENT
 BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/indoor-and-outdoor-plants/a10103831@lidl-calendar
-DTSTAMP:20261003T191304Z
+DTSTAMP:20261008T144547Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261015
 SUMMARY:Indoor and Outdoor Plants
@@ -59,12 +23,75 @@ DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-and-outdo
 URL:https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10103831
 END:VEVENT
 BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/wooden-toys/a10097673@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261015
+SUMMARY:Wooden Toys
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/wooden-toys/a10097673
+URL:https://www.lidl.co.uk/c/wooden-toys/a10097673
+END:VEVENT
+BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/silvercrest-kitchen/a10103722@lidl-calendar
-DTSTAMP:20261003T191304Z
+DTSTAMP:20261008T144547Z
 DTSTART;VALUE=DATE:20261011
 DTEND;VALUE=DATE:20261018
 SUMMARY:Silvercrest
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/silvercrest-kitchen/a10103722
 URL:https://www.lidl.co.uk/c/silvercrest-kitchen/a10103722
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/indoor-and-outdoor-plants/a10104320@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261022
+SUMMARY:Indoor and Outdoor Plants
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10104320
+URL:https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10104320
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/max-and-mila-s-world/a10104093@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261022
+SUMMARY:Max and Mila's World
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/max-and-mila-s-world/a10104093
+URL:https://www.lidl.co.uk/c/max-and-mila-s-world/a10104093
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/autumn-clothing/a10104095@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261022
+SUMMARY:Fashion
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/autumn-clothing/a10104095
+URL:https://www.lidl.co.uk/c/autumn-clothing/a10104095
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/cosy-living/a10104094@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261022
+SUMMARY:Cosy Living
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/cosy-living/a10104094
+URL:https://www.lidl.co.uk/c/cosy-living/a10104094
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/garden/a10104092@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261025
+SUMMARY:Garden
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/garden/a10104092
+URL:https://www.lidl.co.uk/c/garden/a10104092
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/hiking/a10104091@lidl-calendar
+DTSTAMP:20261008T144547Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261025
+SUMMARY:Hiking
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/hiking/a10104091
+URL:https://www.lidl.co.uk/c/hiking/a10104091
 END:VEVENT
 END:VCALENDAR
