@@ -6,7 +6,7 @@ METHOD:PUBLISH
 X-WR-CALNAME:Lidl GB flavour
 BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298@lidl-calendar
-DTSTAMP:20261008T144547Z
+DTSTAMP:20261015T124522Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261015
 SUMMARY:The Alps
@@ -15,11 +15,20 @@ URL:https://www.lidl.co.uk/c/flavour-of-the-week-the-alps/a10104298
 END:VEVENT
 BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-diwali/a10104314@lidl-calendar
-DTSTAMP:20261008T144547Z
+DTSTAMP:20261015T124522Z
 DTSTART;VALUE=DATE:20261015
 DTEND;VALUE=DATE:20261022
 SUMMARY:Diwali
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-diwali/a10104314
 URL:https://www.lidl.co.uk/c/flavour-of-the-week-diwali/a10104314
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-usa/a10104764@lidl-calendar
+DTSTAMP:20261015T124522Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261029
+SUMMARY:USA
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-usa/a10104764
+URL:https://www.lidl.co.uk/c/flavour-of-the-week-usa/a10104764
 END:VEVENT
 END:VCALENDAR
