@@ -7,7 +7,7 @@ import datetime as dt
 import re
 import unittest
 
-from lidl_ics import parse_date
+from lidl_ics import parse_date, strip_flavour_prefix
 
 D = dt.date
 
@@ -58,11 +58,14 @@ class TestFlavourTitles(unittest.TestCase):
     """Lidl writes this promo two ways; both must reduce to the bare theme."""
 
     def strip(self, title):
-        return re.sub(r"^\s*Flavo[u]?r of the Week\s*:?(\s+|$)", "", title,
-                      flags=re.I).strip()
+        return strip_flavour_prefix(title)
 
     def test_with_colon(self):
         self.assertEqual(self.strip("Flavour of the Week: The Alps"), "The Alps")
+
+    def test_hyphen_separator(self):
+        self.assertEqual(self.strip("Flavour of the Week - Greece"), "Greece")
+        self.assertEqual(self.strip("Flavor of the Week - Greece"), "Greece")
 
     def test_without_colon(self):
         self.assertEqual(self.strip("Flavour of the Week Sol and Mar"), "Sol and Mar")
