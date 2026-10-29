@@ -106,6 +106,17 @@ class TestFlavourTitles(unittest.TestCase):
         self.assertEqual(self.strip("Flavour of the Week (Greece)"), "Greece")
         self.assertEqual(self.strip("Flavour of the Week: [Greece]"), "Greece")
 
+    def test_trailing_year_dropped(self):
+        for raw in ("Flavour of the Week: The Alps (2026)",
+                    "Flavour of the Week - The Alps (2025/26)",
+                    "Flavour of the Week: The Alps (2025\u201326)",
+                    "Flavour of the Week: The Alps [2026]"):
+            self.assertEqual(self.strip(raw), "The Alps", msg=raw)
+
+    def test_non_year_bracket_kept(self):
+        text = "Flavour of the Week: Summer (BBQ)"
+        self.assertEqual(self.strip(text), "Summer (BBQ)")
+
 
 class TestCalendarSets(unittest.TestCase):
     """The prefix strip has to actually reach flavour.ics, not just exist."""

@@ -34,12 +34,25 @@ FLAVOUR = re.compile(r"flavour of the week|flavor of the week", re.I)
 # too ("Flavour of the Week: 24 Christmas Puddings").
 FLAVOUR_PREFIX = re.compile(r"^\s*flavou?r of the week\b[^\w]*", re.I)
 
+# Season tiles carry the year in brackets: "The Alps (2026)", "The Alps (2025/26)".
+# That reads as noise in a calendar entry, so it is dropped. A bracketed phrase
+# that is not a year ("Summer (BBQ)") is kept - only date-like content goes.
+YEARLIKE = re.compile(r"^\s*\d{2,4}(?:\s*[/\u2013\u2014-]\s*\d{2,4})?\s*$")
+TRAILING_BRACKET = re.compile(r"\s*[(\[{]([^()\[\]{}]*)[)\]}]$")
+
+
+def _drop_trailing_year(theme):
+    m = TRAILING_BRACKET.search(theme)
+    if m and YEARLIKE.match(m.group(1)):
+        return theme[:m.start()].strip()
+    return theme
+
 
 def strip_flavour_prefix(title):
     """'Flavour of the Week - Greece' -> 'Greece'; unrelated titles untouched."""
     if not FLAVOUR.search(title):
         return title
-    theme = FLAVOUR_PREFIX.sub("", title).strip()
+    theme = _drop_trailing_year(FLAVOUR_PREFIX.sub("", title).strip())
     # Lidl sometimes wraps the theme: "Flavour of the Week (Greece)". The
     # separator strip eats the opening bracket but not its partner, so drop the
     # now-dangling closer rather than emitting "Greece)".
