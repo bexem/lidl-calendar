@@ -5,80 +5,8 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Lidl GB nonfood
 BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/halloween-pumpkins/a10030005@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261001
-DTEND;VALUE=DATE:20261008
-SUMMARY:Halloween Pumpkins
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/halloween-pumpkins/a10030005
-URL:https://www.lidl.co.uk/c/halloween-pumpkins/a10030005
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/fireworks/a10104636@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261015
-DTEND;VALUE=DATE:20261022
-SUMMARY:Fireworks
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/fireworks/a10104636
-URL:https://www.lidl.co.uk/c/fireworks/a10104636
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/indoor-and-outdoor-plants/a10104823@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261022
-DTEND;VALUE=DATE:20261029
-SUMMARY:Indoor and Outdoor Plants
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10104823
-URL:https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10104823
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/home/a10104635@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261022
-DTEND;VALUE=DATE:20261029
-SUMMARY:Home
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/home/a10104635
-URL:https://www.lidl.co.uk/c/home/a10104635
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/bedding/a10104632@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261022
-DTEND;VALUE=DATE:20261029
-SUMMARY:Bedding
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/bedding/a10104632
-URL:https://www.lidl.co.uk/c/bedding/a10104632
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/winter-essentials/a10104633@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261022
-DTEND;VALUE=DATE:20261029
-SUMMARY:Winter Essentials
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/winter-essentials/a10104633
-URL:https://www.lidl.co.uk/c/winter-essentials/a10104633
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/cleaning/a10104631@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261025
-DTEND;VALUE=DATE:20261101
-SUMMARY:Cleaning
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/cleaning/a10104631
-URL:https://www.lidl.co.uk/c/cleaning/a10104631
-END:VEVENT
-BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/diy/a10104630@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261025
-DTEND;VALUE=DATE:20261101
-SUMMARY:DIY
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/diy/a10104630
-URL:https://www.lidl.co.uk/c/diy/a10104630
-END:VEVENT
-BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/indoor-and-outdoor-plants/a10088317@lidl-calendar
-DTSTAMP:20261022T130502Z
+DTSTAMP:20261029T143329Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261105
 SUMMARY:Indoor and Outdoor Plants
@@ -86,17 +14,8 @@ DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-and-outdo
 URL:https://www.lidl.co.uk/c/indoor-and-outdoor-plants/a10088317
 END:VEVENT
 BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/christmas-toys/a10101718@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261029
-DTEND;VALUE=DATE:20261105
-SUMMARY:Christmas Toys
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-toys/a10101718
-URL:https://www.lidl.co.uk/c/christmas-toys/a10101718
-END:VEVENT
-BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/christmas-accessories/a10097682@lidl-calendar
-DTSTAMP:20261022T130502Z
+DTSTAMP:20261029T143329Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261105
 SUMMARY:Home
@@ -104,12 +23,102 @@ DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-access
 URL:https://www.lidl.co.uk/c/christmas-accessories/a10097682
 END:VEVENT
 BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/christmas-toys/a10101718@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261105
+SUMMARY:Christmas Toys
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-toys/a10101718
+URL:https://www.lidl.co.uk/c/christmas-toys/a10101718
+END:VEVENT
+BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/winter-clothing/a10095025@lidl-calendar
-DTSTAMP:20261022T130502Z
+DTSTAMP:20261029T143329Z
 DTSTART;VALUE=DATE:20261101
 DTEND;VALUE=DATE:20261108
 SUMMARY:Winter Clothing
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/winter-clothing/a10095025
 URL:https://www.lidl.co.uk/c/winter-clothing/a10095025
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/advent-calendars/a10081468@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261108
+SUMMARY:Advent Calendars
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/advent-calendars/a10081468
+URL:https://www.lidl.co.uk/c/advent-calendars/a10081468
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/indoor-outdoor-plants/a10089728@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261112
+SUMMARY:Indoor & Outdoor Plants
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/indoor-outdoor-plants/a10089728
+URL:https://www.lidl.co.uk/c/indoor-outdoor-plants/a10089728
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/xxl/a10105452@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261112
+SUMMARY:XXL
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/xxl/a10105452
+URL:https://www.lidl.co.uk/c/xxl/a10105452
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/christmas-lighting/a10081652@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261112
+SUMMARY:Christmas Lighting
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-lighting/a10081652
+URL:https://www.lidl.co.uk/c/christmas-lighting/a10081652
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/christmas-wrapping-and-cards/a10081686@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261112
+SUMMARY:Christmas Wrapping and Cards
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-wrapping-and-cards/a10081686
+URL:https://www.lidl.co.uk/c/christmas-wrapping-and-cards/a10081686
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/christmas-decor-thursday/a10105420@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261112
+SUMMARY:Christmas Décor Thursday
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-decor-thursday/a10105420
+URL:https://www.lidl.co.uk/c/christmas-decor-thursday/a10105420
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/christmas-decor-sunday/a10105572@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261115
+SUMMARY:Christmas Décor Sunday
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/christmas-decor-sunday/a10105572
+URL:https://www.lidl.co.uk/c/christmas-decor-sunday/a10105572
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/diy/a10097234@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261115
+SUMMARY:DIY
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/diy/a10097234
+URL:https://www.lidl.co.uk/c/diy/a10097234
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/car/a10097670@lidl-calendar
+DTSTAMP:20261029T143329Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261115
+SUMMARY:Car
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/car/a10097670
+URL:https://www.lidl.co.uk/c/car/a10097670
 END:VEVENT
 END:VCALENDAR

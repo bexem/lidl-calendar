@@ -5,17 +5,8 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Lidl GB flavour
 BEGIN:VEVENT
-UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-usa/a10104764@lidl-calendar
-DTSTAMP:20261022T130502Z
-DTSTART;VALUE=DATE:20261022
-DTEND;VALUE=DATE:20261029
-SUMMARY:USA
-DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-usa/a10104764
-URL:https://www.lidl.co.uk/c/flavour-of-the-week-usa/a10104764
-END:VEVENT
-BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-greece/a10092213@lidl-calendar
-DTSTAMP:20261022T130502Z
+DTSTAMP:20261029T143329Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261105
 SUMMARY:- Greece
