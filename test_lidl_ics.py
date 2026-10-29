@@ -7,7 +7,7 @@ import datetime as dt
 import re
 import unittest
 
-from lidl_ics import parse_date, strip_flavour_prefix
+from lidl_ics import calendar_sets, parse_date, strip_flavour_prefix
 
 D = dt.date
 
@@ -79,6 +79,46 @@ class TestFlavourTitles(unittest.TestCase):
     def test_non_flavour_untouched(self):
         for t in ("Pick of the Week", "The Wine Edit.", "Wooden Toys"):
             self.assertEqual(self.strip(t), t)
+
+    def test_unseen_separators(self):
+        # Lidl has used colon, dash and plain space so far; the strip must not
+        # depend on knowing the next one.
+        for sep in (" | ", " \u2022 ", " - ", " \u2013 ", ".", "  "):
+            self.assertEqual(self.strip(f"Flavour of the Week{sep}Greece"),
+                             "Greece", msg=repr(sep))
+
+    def test_theme_starting_with_digit(self):
+        self.assertEqual(self.strip("Flavour of the Week: 24 Christmas Puddings"),
+                         "24 Christmas Puddings")
+
+    def test_bare_prefix_not_emptied(self):
+        self.assertEqual(self.strip("Flavour of the Week"), "Flavour of the Week")
+
+
+class TestCalendarSets(unittest.TestCase):
+    """The prefix strip has to actually reach flavour.ics, not just exist."""
+
+    def test_flavour_gets_bare_theme_and_others_keep_prefix(self):
+        events = [
+            {"title": "Flavour of the Week - Greece", "food": True},
+            {"title": "Flavour of the Week: The Alps", "food": True},
+            {"title": "The Wine Edit.", "food": True},
+            {"title": "DIY", "food": False},
+        ]
+        sets = calendar_sets(events)
+
+        self.assertEqual([e["title"] for e in sets["flavour"]],
+                         ["Greece", "The Alps"])
+        self.assertIn("Flavour of the Week - Greece",
+                      [e["title"] for e in sets["food"]])
+        self.assertEqual([e["title"] for e in sets["all"]],
+                         [e["title"] for e in events])
+        # Stripping must copy, not mutate the scraped events in place.
+        self.assertEqual(events[0]["title"], "Flavour of the Week - Greece")
+
+    def test_no_flavour_offers_yields_empty_set(self):
+        self.assertEqual(calendar_sets([{"title": "DIY", "food": False}])["flavour"],
+                         [])
 
 
 if __name__ == "__main__":

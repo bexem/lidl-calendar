@@ -20,6 +20,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Run tests
+        # The scraper writes to a subscriber-facing feed, so fail here rather
+        # than publishing output from code the suite rejects.
+        run: python3 -m unittest -v
+
       - name: Scrape Lidl and write .ics
         run: python3 lidl_ics.py --outdir .
 

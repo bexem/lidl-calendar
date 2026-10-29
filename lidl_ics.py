@@ -26,17 +26,21 @@ FOOD = re.compile(
 # "Flavour of the Week Sol and Mar" both occur, sometimes with stray spaces.
 FLAVOUR = re.compile(r"flavour of the week|flavor of the week", re.I)
 
-# The separator Lidl uses after the prefix varies: ": The Alps", " - Greece",
-# or just a space ("Flavour of the Week Sol and Mar").
-FLAVOUR_PREFIX = re.compile(
-    r"^\s*flavou?r of the week\s*(?:[:\u2013\u2014-]\s*)?", re.I)
+# Lidl's separator after the prefix drifts (": The Alps", " - Greece", or a
+# plain space in "Flavour of the Week Sol and Mar"), so do not enumerate them:
+# drop everything up to the first alphanumeric character instead. That survives
+# separators nobody has seen yet ("|", "•"), while a theme starting with a digit
+# ("Flavour of the Week: 24 Christmas Puddings") keeps its first character.
+FLAVOUR_PREFIX = re.compile(r"^\s*flavou?r of the week\b\s*[^0-9a-z]*", re.I)
 
 
 def strip_flavour_prefix(title):
     """'Flavour of the Week - Greece' -> 'Greece'; unrelated titles untouched."""
     if not FLAVOUR.search(title):
         return title
-    return FLAVOUR_PREFIX.sub("", title).strip()
+    # A bare "Flavour of the Week" has no theme left; keep the original title
+    # rather than emitting an empty SUMMARY.
+    return FLAVOUR_PREFIX.sub("", title).strip() or title
 
 # Lidl advertises at most ~8 weeks ahead and leaves stale tiles on the homepage.
 WINDOW_PAST, WINDOW_FUTURE = 21, 60
@@ -126,6 +130,24 @@ def ics(events, name, now):
     return ("\r\n".join(out) + "\r\n").encode("utf-8")
 
 
+def calendar_sets(events):
+    """Split scraped events into the four calendars, stripping flavour prefixes.
+
+    Pure so the wiring is testable without the network: the earlier bug was a
+    correct regex that main() never called.
+    """
+    sets = {"food": [e for e in events if e["food"]],
+            "nonfood": [e for e in events if not e["food"]],
+            "all": events}
+    # ponytail: flavour.ics drops the "Flavour of the Week" prefix so the
+    # theme reads clean in a calendar ("The Alps", not "Flavour of the Week:
+    # The Alps"). The prefix is kept in food/all, where it is the only thing
+    # distinguishing one Lidl promo from another.
+    sets["flavour"] = [dict(e, title=strip_flavour_prefix(e["title"]))
+                       for e in events if FLAVOUR.search(e["title"])]
+    return sets
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", default="www.lidl.co.uk")
@@ -138,16 +160,7 @@ def main():
     events = scrape(args.domain, today)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
-    sets = {"food": [e for e in events if e["food"]],
-            "nonfood": [e for e in events if not e["food"]],
-            "all": events}
-    # ponytail: flavour.ics drops the "Flavour of the Week" prefix so the
-    # theme reads clean in a calendar ("The Alps", not "Flavour of the Week:
-    # The Alps"). The prefix is kept in food/all, where it is the only thing
-    # distinguishing one Lidl promo from another. Lidl pads some titles
-    # ("The Wine Edit. "), so the result is stripped too.
-    sets["flavour"] = [dict(e, title=strip_flavour_prefix(e["title"]))
-                       for e in events if FLAVOUR.search(e["title"])]
+    sets = calendar_sets(events)
     for name, evs in sets.items():
         if not evs:
             continue

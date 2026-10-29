@@ -4,7 +4,7 @@ Subscribable calendar of Lidl GB's themed offer weeks — "Flavour of the Week:
 The Alps", The Wine Edit, Halloween, DIY, and so on.
 
 Lidl publishes no calendar feed. This scrapes the marketing tiles from
-[lidl.co.uk](https://www.lidl.co.uk/) once a week and regenerates three `.ics`
+[lidl.co.uk](https://www.lidl.co.uk/) once a week and regenerates four `.ics`
 files you can subscribe to.
 
 ## Subscribe
@@ -32,14 +32,16 @@ offers all run Thursday to Wednesday.
 
 ```
 lidl_ics.py            scraper, stdlib only, no dependencies
-.github/workflows/     runs Thursdays 07:30 UTC, commits only if changed
+test_lidl_ics.py       unit tests, stdlib unittest
+.github/workflows/     runs the tests, then Thursday 07:30 UTC, commits if changed
 food.ics nonfood.ics   generated, do not hand-edit
-all.ics
+all.ics flavour.ics
 ```
 
 Run it locally:
 
 ```bash
+python3 -m unittest -v          # must pass before the weekly run commits anything
 python3 lidl_ics.py --outdir .
 ```
 
