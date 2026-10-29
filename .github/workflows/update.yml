@@ -26,6 +26,10 @@ jobs:
         run: python3 -m unittest -v
 
       - name: Scrape Lidl and write .ics
+        id: scrape
+        # A missing flavour promo must not block the other three calendars, so
+        # let the commit run and surface the failure afterwards.
+        continue-on-error: true
         run: python3 lidl_ics.py --outdir .
 
       - name: Commit if changed
@@ -41,3 +45,9 @@ jobs:
           fi
           git commit -m "update: $(grep -c BEGIN:VEVENT all.ics) offers"
           git push
+
+      - name: Fail if the scrape reported an incomplete week
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "The scrape exited non-zero (see the log above)."
+          exit 1

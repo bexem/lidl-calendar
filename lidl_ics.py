@@ -29,18 +29,26 @@ FLAVOUR = re.compile(r"flavour of the week|flavor of the week", re.I)
 # Lidl's separator after the prefix drifts (": The Alps", " - Greece", or a
 # plain space in "Flavour of the Week Sol and Mar"), so do not enumerate them:
 # drop everything up to the first alphanumeric character instead. That survives
-# separators nobody has seen yet ("|", "•"), while a theme starting with a digit
-# ("Flavour of the Week: 24 Christmas Puddings") keeps its first character.
-FLAVOUR_PREFIX = re.compile(r"^\s*flavou?r of the week\b\s*[^0-9a-z]*", re.I)
+# separators nobody has seen yet ("|", "•"), and \w is Unicode-aware, so an
+# accented theme ("- Österreich") keeps its first letter. Digits stop the strip
+# too ("Flavour of the Week: 24 Christmas Puddings").
+FLAVOUR_PREFIX = re.compile(r"^\s*flavou?r of the week\b[^\w]*", re.I)
 
 
 def strip_flavour_prefix(title):
     """'Flavour of the Week - Greece' -> 'Greece'; unrelated titles untouched."""
     if not FLAVOUR.search(title):
         return title
+    theme = FLAVOUR_PREFIX.sub("", title).strip()
+    # Lidl sometimes wraps the theme: "Flavour of the Week (Greece)". The
+    # separator strip eats the opening bracket but not its partner, so drop the
+    # now-dangling closer rather than emitting "Greece)".
+    opener = {")": "(", "]": "[", "}": "{"}.get(theme[-1:])
+    if opener and theme.count(theme[-1:]) > theme.count(opener):
+        theme = theme[:-1].strip()
     # A bare "Flavour of the Week" has no theme left; keep the original title
     # rather than emitting an empty SUMMARY.
-    return FLAVOUR_PREFIX.sub("", title).strip() or title
+    return theme or title
 
 # Lidl advertises at most ~8 weeks ahead and leaves stale tiles on the homepage.
 WINDOW_PAST, WINDOW_FUTURE = 21, 60
@@ -148,6 +156,11 @@ def calendar_sets(events):
     return sets
 
 
+def missing_sets(sets):
+    """Calendars with no offers: their .ics on disk is stale, not "unchanged"."""
+    return [name for name, evs in sets.items() if not evs]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", default="www.lidl.co.uk")
@@ -161,14 +174,27 @@ def main():
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
     sets = calendar_sets(events)
+    missing = missing_sets(sets)
     for name, evs in sets.items():
-        if not evs:
+        if name in missing:
+            # An empty set is not "nothing to do": the .ics already on disk is
+            # now stale and subscribers keep being served last week's offers.
+            print(f"warning: {name}.ics not written - no matching offers",
+                  file=sys.stderr)
             continue
         with open(f"{args.outdir}/{name}.ics", "wb") as f:
             f.write(ics(evs, f"Lidl GB {name}", stamp))
         print(f"{name}.ics: {len(evs)} events")
     for e in sorted(events, key=lambda x: x["start"]):
         print(f"  {e['start']}  {e['title']}")
+    # flavour.ics is the point of this repo. If Lidl renames or drops the promo
+    # tile, no scrape of the other calendars should look like success. Exit
+    # non-zero only after the other files are written, so a flavour breakage
+    # does not freeze food/nonfood/all as well.
+    if "flavour" in missing:
+        print("error: no Flavour of the Week offer scraped; flavour.ics left stale",
+              file=sys.stderr)
+        return 1
     return 0
 
 

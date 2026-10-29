@@ -7,7 +7,8 @@ import datetime as dt
 import re
 import unittest
 
-from lidl_ics import calendar_sets, parse_date, strip_flavour_prefix
+from lidl_ics import (calendar_sets, missing_sets, parse_date,
+                      strip_flavour_prefix)
 
 D = dt.date
 
@@ -94,6 +95,17 @@ class TestFlavourTitles(unittest.TestCase):
     def test_bare_prefix_not_emptied(self):
         self.assertEqual(self.strip("Flavour of the Week"), "Flavour of the Week")
 
+    def test_accented_theme_keeps_first_letter(self):
+        # The separator strip must stop at a letter, not at an ASCII one.
+        self.assertEqual(self.strip("Flavour of the Week - \u00d6sterreich"),
+                         "\u00d6sterreich")
+        self.assertEqual(self.strip("Flavour of the Week: \u00c9picure"),
+                         "\u00c9picure")
+
+    def test_bracketed_theme_unwrapped(self):
+        self.assertEqual(self.strip("Flavour of the Week (Greece)"), "Greece")
+        self.assertEqual(self.strip("Flavour of the Week: [Greece]"), "Greece")
+
 
 class TestCalendarSets(unittest.TestCase):
     """The prefix strip has to actually reach flavour.ics, not just exist."""
@@ -118,6 +130,18 @@ class TestCalendarSets(unittest.TestCase):
 
     def test_no_flavour_offers_yields_empty_set(self):
         self.assertEqual(calendar_sets([{"title": "DIY", "food": False}])["flavour"],
+                         [])
+
+
+class TestMissingSets(unittest.TestCase):
+    """An empty calendar is a stale file on disk, not a no-op."""
+
+    def test_flavour_reported_when_absent(self):
+        self.assertEqual(missing_sets({"food": [{"a": 1}], "flavour": []}),
+                         ["flavour"])
+
+    def test_none_missing(self):
+        self.assertEqual(missing_sets({"food": [{"a": 1}], "flavour": [{"b": 2}]}),
                          [])
 
 
