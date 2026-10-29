@@ -6,10 +6,10 @@ METHOD:PUBLISH
 X-WR-CALNAME:Lidl GB flavour
 BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-greece/a10092213@lidl-calendar
-DTSTAMP:20261029T143329Z
+DTSTAMP:20261029T171739Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261105
-SUMMARY:- Greece
+SUMMARY:Greece
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/flavour-of-the-week-greece/a10092213
 URL:https://www.lidl.co.uk/c/flavour-of-the-week-greece/a10092213
 END:VEVENT

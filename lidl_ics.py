@@ -26,6 +26,18 @@ FOOD = re.compile(
 # "Flavour of the Week Sol and Mar" both occur, sometimes with stray spaces.
 FLAVOUR = re.compile(r"flavour of the week|flavor of the week", re.I)
 
+# The separator Lidl uses after the prefix varies: ": The Alps", " - Greece",
+# or just a space ("Flavour of the Week Sol and Mar").
+FLAVOUR_PREFIX = re.compile(
+    r"^\s*flavou?r of the week\s*(?:[:\u2013\u2014-]\s*)?", re.I)
+
+
+def strip_flavour_prefix(title):
+    """'Flavour of the Week - Greece' -> 'Greece'; unrelated titles untouched."""
+    if not FLAVOUR.search(title):
+        return title
+    return FLAVOUR_PREFIX.sub("", title).strip()
+
 # Lidl advertises at most ~8 weeks ahead and leaves stale tiles on the homepage.
 WINDOW_PAST, WINDOW_FUTURE = 21, 60
 UA = "Mozilla/5.0 (compatible; lidl-calendar/1.0; +https://github.com/)"
@@ -134,8 +146,7 @@ def main():
     # The Alps"). The prefix is kept in food/all, where it is the only thing
     # distinguishing one Lidl promo from another. Lidl pads some titles
     # ("The Wine Edit. "), so the result is stripped too.
-    sets["flavour"] = [dict(e, title=re.sub(r"^\s*Flavo[u]?r of the Week\s*:?(\s+|$)",
-                                             "", e["title"], flags=re.I).strip())
+    sets["flavour"] = [dict(e, title=strip_flavour_prefix(e["title"]))
                        for e in events if FLAVOUR.search(e["title"])]
     for name, evs in sets.items():
         if not evs:
