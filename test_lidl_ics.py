@@ -14,8 +14,7 @@ import unittest
 from unittest import mock
 
 import lidl_ics
-from lidl_ics import (calendar_sets, missing_sets, parse_date,
-                      strip_flavour_prefix)
+from lidl_ics import (calendar_sets, parse_date, strip_flavour_prefix)
 
 D = dt.date
 
@@ -151,57 +150,77 @@ class TestCalendarSets(unittest.TestCase):
                          [])
 
 
-class TestMissingSets(unittest.TestCase):
-    """An empty calendar is a stale file on disk, not a no-op."""
+PUBLISHED_FLAVOUR = (
+    b"BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//lidl-calendar//EN\r\n"
+    b"CALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Lidl GB flavour\r\n"
+    b"BEGIN:VEVENT\r\n"
+    b"UID:https%3A//www.lidl.co.uk/c/flavour-of-the-week-greece/a10092213"
+    b"@lidl-calendar\r\n"
+    b"DTSTAMP:20261029T171739Z\r\n"
+    b"DTSTART;VALUE=DATE:20261029\r\nDTEND;VALUE=DATE:20261105\r\n"
+    b"SUMMARY:Greece\r\n"
+    b"URL:https://www.lidl.co.uk/c/flavour-of-the-week-greece/a10092213\r\n"
+    b"END:VEVENT\r\nEND:VCALENDAR\r\n")
 
-    def test_flavour_reported_when_absent(self):
-        self.assertEqual(missing_sets({"food": [{"a": 1}], "flavour": []}),
-                         ["flavour"])
 
-    def test_none_missing(self):
-        self.assertEqual(missing_sets({"food": [{"a": 1}], "flavour": [{"b": 2}]}),
-                         [])
-
-
-class TestFlavourWrittenEmpty(unittest.TestCase):
-    """A missing flavour promo must clear the file, not freeze last week's."""
+class TestMergeWithPublished(unittest.TestCase):
+    """Published weeks survive; only new offers are added."""
 
     PICK = {"title": "Pick of the Week", "start": D(2026, 11, 5),
             "href": "https://www.lidl.co.uk/c/store/pick-of-the-week/a10089584",
             "food": True}
-    FLAVOUR = {"title": "Flavour of the Week: Greece", "start": D(2026, 11, 5),
-               "href": "https://www.lidl.co.uk/c/flavour-of-the-week-greece/a1",
+    FLAVOUR = {"title": "Flavour of the Week: Greece", "start": D(2026, 11, 12),
+               "href": "https://www.lidl.co.uk/c/flavour-of-the-week-greece/a2",
                "food": True}
 
-    def run_main(self, outdir, events):
-        with mock.patch.object(lidl_ics, "scrape", return_value=events), \
-             mock.patch.object(sys, "argv", ["lidl_ics.py", "--outdir", outdir]), \
-             contextlib.redirect_stdout(io.StringIO()), \
+    def run_main(self, outdir, events=None, error=None):
+        scrape = mock.patch.object(lidl_ics, "scrape",
+                                   return_value=events,
+                                   side_effect=error)
+        argv = mock.patch.object(sys, "argv",
+                                 ["lidl_ics.py", "--outdir", outdir])
+        with scrape, argv, contextlib.redirect_stdout(io.StringIO()), \
              contextlib.redirect_stderr(io.StringIO()):
             return lidl_ics.main()
 
-    def test_absent_promo_writes_empty_calendar_and_exits_zero(self):
-        with tempfile.TemporaryDirectory() as d:
-            path = os.path.join(d, "flavour.ics")
-            with open(path, "wb") as f:
-                f.write(b"BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Greece\r\n"
-                        b"END:VEVENT\r\nEND:VCALENDAR\r\n")
-            rc = self.run_main(d, [self.PICK])
-            with open(path, encoding="utf-8", newline="") as f:
-                body = f.read()
-        self.assertEqual(rc, 0)
-        self.assertNotIn("BEGIN:VEVENT", body)
-        self.assertNotIn("Greece", body)
-        self.assertTrue(body.startswith("BEGIN:VCALENDAR\r\n"))
-        self.assertTrue(body.endswith("END:VCALENDAR\r\n"))
+    def seed(self, d):
+        path = os.path.join(d, "flavour.ics")
+        with open(path, "wb") as f:
+            f.write(PUBLISHED_FLAVOUR)
+        return path
 
-    def test_present_promo_writes_bare_theme(self):
+    def read(self, path):
+        with open(path, encoding="utf-8", newline="") as f:
+            return f.read()
+
+    def test_week_without_the_promo_keeps_published_weeks(self):
+        # Lidl's Christmas weeks have no flavour tile. That is not an error and
+        # must not delete the last theme the feed published.
         with tempfile.TemporaryDirectory() as d:
-            rc = self.run_main(d, [self.PICK, self.FLAVOUR])
-            with open(os.path.join(d, "flavour.ics"), encoding="utf-8") as f:
-                body = f.read()
+            path = self.seed(d)
+            rc = self.run_main(d, [self.PICK])
+            body = self.read(path)
         self.assertEqual(rc, 0)
         self.assertIn("SUMMARY:Greece", body)
+        self.assertEqual(body.encode(), PUBLISHED_FLAVOUR)
+
+    def test_new_promo_is_added_beside_the_published_one(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = self.seed(d)
+            self.assertEqual(self.run_main(d, [self.PICK, self.FLAVOUR]), 0)
+            body = self.read(path)
+        self.assertIn("SUMMARY:Greece", body)
+        self.assertIn("DTSTART;VALUE=DATE:20261112", body)
+        # The old event keeps its own DTSTAMP: an unchanged week commits nothing.
+        self.assertIn("DTSTAMP:20261029T171739Z", body)
+
+    def test_fetch_failure_leaves_published_feeds_alone(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = self.seed(d)
+            with self.assertRaises(SystemExit):
+                self.run_main(d, error=SystemExit("No tiles parsed"))
+            body = self.read(path)
+        self.assertEqual(body.encode(), PUBLISHED_FLAVOUR)
 
 
 if __name__ == "__main__":

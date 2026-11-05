@@ -135,17 +135,56 @@ def esc(v):
              .replace(",", "\\,").replace("\n", "\\n"))
 
 
-def ics(events, name, now):
+def event_uid(href):
+    return f"{urllib.parse.quote(href)}@lidl-calendar"
+
+
+def read_existing(path):
+    """{UID: (DTSTART date, [body lines])} from the .ics already on disk.
+
+    Lidl drops a tile from the homepage the moment its week ends, so rebuilding
+    from the scrape alone erased every week the feed had already published. The
+    calendar is a record of what Lidl ran, not a snapshot of today's homepage.
+    """
+    try:
+        with open(path, "rb") as f:
+            text = f.read().decode("utf-8", "replace")
+    except FileNotFoundError:
+        return {}
+    found = {}
+    for body in re.findall(r"BEGIN:VEVENT\r?\n(.*?)\r?\nEND:VEVENT", text, re.S):
+        lines = body.splitlines()
+        uid = next((l[4:].strip() for l in lines if l.startswith("UID:")), None)
+        start = next((re.search(r"(\d{8})$", l) for l in lines
+                      if l.startswith("DTSTART")), None)
+        if not uid or not start:
+            continue
+        found[uid] = (dt.datetime.strptime(start.group(1), "%Y%m%d").date(),
+                      lines)
+    return found
+
+
+def ics(events, name, now, existing=None):
+    """New offers merged into the published ones, keyed by UID."""
+    existing = existing or {}
+    body = {}
+    for e in events:
+        uid = event_uid(e["href"])
+        end = e["start"] + dt.timedelta(days=7)   # Lidl offers run one week
+        # An already-published offer keeps its block, DTSTAMP included, so an
+        # unchanged week writes identical bytes and commits nothing.
+        body[uid] = existing.get(uid) or (e["start"], [
+            f"UID:{uid}", f"DTSTAMP:{now}",
+            f"DTSTART;VALUE=DATE:{e['start']:%Y%m%d}",
+            f"DTEND;VALUE=DATE:{end:%Y%m%d}", f"SUMMARY:{esc(e['title'])}",
+            f"DESCRIPTION:{esc('Lidl GB special week. See: ' + e['href'])}",
+            f"URL:{e['href']}"])
+    for uid, value in existing.items():
+        body.setdefault(uid, value)
     out = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//lidl-calendar//EN",
            "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{esc(name)}"]
-    for e in sorted(events, key=lambda x: x["start"]):
-        end = e["start"] + dt.timedelta(days=7)   # Lidl offers run one week
-        out += ["BEGIN:VEVENT",
-                f"UID:{urllib.parse.quote(e['href'])}@lidl-calendar",
-                f"DTSTAMP:{now}", f"DTSTART;VALUE=DATE:{e['start']:%Y%m%d}",
-                f"DTEND;VALUE=DATE:{end:%Y%m%d}", f"SUMMARY:{esc(e['title'])}",
-                f"DESCRIPTION:{esc('Lidl GB special week. See: ' + e['href'])}",
-                f"URL:{e['href']}", "END:VEVENT"]
+    for uid in sorted(body, key=lambda u: (body[u][0], u)):
+        out += ["BEGIN:VEVENT", *body[uid][1], "END:VEVENT"]
     out.append("END:VCALENDAR")
     # RFC 5545 mandates CRLF. Write in binary so no platform translates it.
     return ("\r\n".join(out) + "\r\n").encode("utf-8")
@@ -169,11 +208,6 @@ def calendar_sets(events):
     return sets
 
 
-def missing_sets(sets):
-    """Calendars with no offers: their .ics on disk is stale, not "unchanged"."""
-    return [name for name, evs in sets.items() if not evs]
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", default="www.lidl.co.uk")
@@ -183,29 +217,26 @@ def main():
 
     today = (dt.date.fromisoformat(args.today) if args.today
              else dt.datetime.now(dt.timezone.utc).date())
+    # A fetch or parse failure raises here, before anything is written, so a
+    # broken scrape cannot touch the published feeds.
     events = scrape(args.domain, today)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
     sets = calendar_sets(events)
-    missing = missing_sets(sets)
     for name, evs in sets.items():
-        if name == "flavour" and not evs:
-            # Lidl drops this promo for weeks at a time - the Christmas run has
-            # no flavour tile at all. An empty calendar is then the honest
-            # answer, and writing it clears the expired theme instead of
-            # leaving subscribers on last week's offer forever.
-            print("flavour.ics: 0 events - no Flavour of the Week promo live",
+        path = f"{args.outdir}/{name}.ics"
+        existing = read_existing(path)
+        payload = ics(evs, f"Lidl GB {name}", stamp, existing)
+        with open(path, "wb") as f:
+            f.write(payload)
+        new = sum(1 for e in evs if event_uid(e["href"]) not in existing)
+        print(f"{name}.ics: {new} new, {len(existing) + new} total")
+        if not evs:
+            # Not a failure: Lidl simply is not running this promo this week
+            # (the Christmas weeks have no flavour tile). Nothing new to add,
+            # and the weeks already published stay where they are.
+            print(f"{name}.ics: no matching offers this week - nothing added",
                   file=sys.stderr)
-        elif name in missing:
-            # For the other calendars an empty set is not "nothing to do": the
-            # .ics already on disk is stale and subscribers keep being served
-            # last week's offers.
-            print(f"warning: {name}.ics not written - no matching offers",
-                  file=sys.stderr)
-            continue
-        with open(f"{args.outdir}/{name}.ics", "wb") as f:
-            f.write(ics(evs, f"Lidl GB {name}", stamp))
-        print(f"{name}.ics: {len(evs)} events")
     for e in sorted(events, key=lambda x: x["start"]):
         print(f"  {e['start']}  {e['title']}")
     return 0

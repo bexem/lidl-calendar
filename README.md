@@ -54,11 +54,16 @@ python3 lidl_ics.py --outdir .
   −21/+60 day window, so stale tiles are dropped instead of rolling into the
   wrong year.
 - If Lidl changes their markup the scraper exits non-zero rather than writing
-  an empty calendar, so a silent breakage can't wipe your feed.
-- The flavour promo is seasonal: Lidl runs no "Flavour of the Week" tile for
-  parts of the year (the Christmas weeks, for example). On those weeks
-  `flavour.ics` is rewritten as a valid calendar with no events, so a
-  subscriber's copy clears the expired theme instead of holding last week's.
+  an empty calendar, so a silent breakage can't wipe your feed. That failure
+  happens before anything is written: a bad fetch leaves the published files
+  untouched.
+- The calendars accumulate. Each run merges scraped offers into what is already
+  published, keyed by the offer URL, so Lidl's own tiles dropping off the
+  homepage never deletes a week your feed already carried. An unchanged event
+  keeps its `DTSTAMP`, so a week with nothing new writes identical bytes.
+- A week with no offers for a given calendar is not an error. Lidl runs no
+  "Flavour of the Week" for parts of the year (the Christmas weeks, for
+  example): the run reports `0 new`, adds nothing, and exits 0.
 
 ## Legal
 
