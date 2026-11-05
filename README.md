@@ -55,6 +55,10 @@ python3 lidl_ics.py --outdir .
   wrong year.
 - If Lidl changes their markup the scraper exits non-zero rather than writing
   an empty calendar, so a silent breakage can't wipe your feed.
+- The flavour promo is seasonal: Lidl runs no "Flavour of the Week" tile for
+  parts of the year (the Christmas weeks, for example). On those weeks
+  `flavour.ics` is rewritten as a valid calendar with no events, so a
+  subscriber's copy clears the expired theme instead of holding last week's.
 
 ## Legal
 

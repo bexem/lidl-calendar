@@ -189,9 +189,17 @@ def main():
     sets = calendar_sets(events)
     missing = missing_sets(sets)
     for name, evs in sets.items():
-        if name in missing:
-            # An empty set is not "nothing to do": the .ics already on disk is
-            # now stale and subscribers keep being served last week's offers.
+        if name == "flavour" and not evs:
+            # Lidl drops this promo for weeks at a time - the Christmas run has
+            # no flavour tile at all. An empty calendar is then the honest
+            # answer, and writing it clears the expired theme instead of
+            # leaving subscribers on last week's offer forever.
+            print("flavour.ics: 0 events - no Flavour of the Week promo live",
+                  file=sys.stderr)
+        elif name in missing:
+            # For the other calendars an empty set is not "nothing to do": the
+            # .ics already on disk is stale and subscribers keep being served
+            # last week's offers.
             print(f"warning: {name}.ics not written - no matching offers",
                   file=sys.stderr)
             continue
@@ -200,14 +208,6 @@ def main():
         print(f"{name}.ics: {len(evs)} events")
     for e in sorted(events, key=lambda x: x["start"]):
         print(f"  {e['start']}  {e['title']}")
-    # flavour.ics is the point of this repo. If Lidl renames or drops the promo
-    # tile, no scrape of the other calendars should look like success. Exit
-    # non-zero only after the other files are written, so a flavour breakage
-    # does not freeze food/nonfood/all as well.
-    if "flavour" in missing:
-        print("error: no Flavour of the Week offer scraped; flavour.ics left stale",
-              file=sys.stderr)
-        return 1
     return 0
 
 

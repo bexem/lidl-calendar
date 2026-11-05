@@ -3,10 +3,17 @@
 The date logic is the one part that can silently produce a wrong year, so it
 gets the coverage. Everything else is a straight scrape.
 """
+import contextlib
 import datetime as dt
+import io
+import os
 import re
+import sys
+import tempfile
 import unittest
+from unittest import mock
 
+import lidl_ics
 from lidl_ics import (calendar_sets, missing_sets, parse_date,
                       strip_flavour_prefix)
 
@@ -154,6 +161,47 @@ class TestMissingSets(unittest.TestCase):
     def test_none_missing(self):
         self.assertEqual(missing_sets({"food": [{"a": 1}], "flavour": [{"b": 2}]}),
                          [])
+
+
+class TestFlavourWrittenEmpty(unittest.TestCase):
+    """A missing flavour promo must clear the file, not freeze last week's."""
+
+    PICK = {"title": "Pick of the Week", "start": D(2026, 11, 5),
+            "href": "https://www.lidl.co.uk/c/store/pick-of-the-week/a10089584",
+            "food": True}
+    FLAVOUR = {"title": "Flavour of the Week: Greece", "start": D(2026, 11, 5),
+               "href": "https://www.lidl.co.uk/c/flavour-of-the-week-greece/a1",
+               "food": True}
+
+    def run_main(self, outdir, events):
+        with mock.patch.object(lidl_ics, "scrape", return_value=events), \
+             mock.patch.object(sys, "argv", ["lidl_ics.py", "--outdir", outdir]), \
+             contextlib.redirect_stdout(io.StringIO()), \
+             contextlib.redirect_stderr(io.StringIO()):
+            return lidl_ics.main()
+
+    def test_absent_promo_writes_empty_calendar_and_exits_zero(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "flavour.ics")
+            with open(path, "wb") as f:
+                f.write(b"BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Greece\r\n"
+                        b"END:VEVENT\r\nEND:VCALENDAR\r\n")
+            rc = self.run_main(d, [self.PICK])
+            with open(path, encoding="utf-8", newline="") as f:
+                body = f.read()
+        self.assertEqual(rc, 0)
+        self.assertNotIn("BEGIN:VEVENT", body)
+        self.assertNotIn("Greece", body)
+        self.assertTrue(body.startswith("BEGIN:VCALENDAR\r\n"))
+        self.assertTrue(body.endswith("END:VCALENDAR\r\n"))
+
+    def test_present_promo_writes_bare_theme(self):
+        with tempfile.TemporaryDirectory() as d:
+            rc = self.run_main(d, [self.PICK, self.FLAVOUR])
+            with open(os.path.join(d, "flavour.ics"), encoding="utf-8") as f:
+                body = f.read()
+        self.assertEqual(rc, 0)
+        self.assertIn("SUMMARY:Greece", body)
 
 
 if __name__ == "__main__":
