@@ -139,4 +139,31 @@ SUMMARY:Winter Fashion
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/winter-fashion/a10101480
 URL:https://www.lidl.co.uk/c/store/winter-fashion/a10101480
 END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/black-friday-tech/a10106601@lidl-calendar
+DTSTAMP:20261112T160609Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261126
+SUMMARY:Black Friday Tech
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/black-friday-tech/a10106601
+URL:https://www.lidl.co.uk/c/black-friday-tech/a10106601
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/store/indoor-and-outdoor-plants/a10103831@lidl-calendar
+DTSTAMP:20261112T160609Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261126
+SUMMARY:Indoor and Outdoor Plants
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/indoor-and-outdoor-plants/a10103831
+URL:https://www.lidl.co.uk/c/store/indoor-and-outdoor-plants/a10103831
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/store/christmas-clothing/a10104095@lidl-calendar
+DTSTAMP:20261112T160609Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261129
+SUMMARY:Christmas Clothing
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/christmas-clothing/a10104095
+URL:https://www.lidl.co.uk/c/store/christmas-clothing/a10104095
+END:VEVENT
 END:VCALENDAR
