@@ -166,4 +166,31 @@ SUMMARY:Christmas Clothing
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/christmas-clothing/a10104095
 URL:https://www.lidl.co.uk/c/store/christmas-clothing/a10104095
 END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/store/big-toy-event/a10081213@lidl-calendar
+DTSTAMP:20261119T164135Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261203
+SUMMARY:Big Toy Event
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/big-toy-event/a10081213
+URL:https://www.lidl.co.uk/c/store/big-toy-event/a10081213
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/store/pet/a10088319@lidl-calendar
+DTSTAMP:20261119T164135Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261203
+SUMMARY:Pet
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/pet/a10088319
+URL:https://www.lidl.co.uk/c/store/pet/a10088319
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/big-toy-event/a10106633@lidl-calendar
+DTSTAMP:20261119T164135Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261206
+SUMMARY:Big Toy Event
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/big-toy-event/a10106633
+URL:https://www.lidl.co.uk/c/big-toy-event/a10106633
+END:VEVENT
 END:VCALENDAR

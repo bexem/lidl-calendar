@@ -32,6 +32,15 @@ DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/pick-of-th
 URL:https://www.lidl.co.uk/c/store/pick-of-the-week/a10088664
 END:VEVENT
 BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/black-friday-kitchen-and-home/a10106591@lidl-calendar
+DTSTAMP:20261119T164135Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261126
+SUMMARY:Black Friday Kitchen and Home
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/black-friday-kitchen-and-home/a10106591
+URL:https://www.lidl.co.uk/c/black-friday-kitchen-and-home/a10106591
+END:VEVENT
+BEGIN:VEVENT
 UID:https%3A//www.lidl.co.uk/c/black-friday-kitchen-and-house/a10106591@lidl-calendar
 DTSTAMP:20261112T160609Z
 DTSTART;VALUE=DATE:20261119
@@ -57,5 +66,14 @@ DTEND;VALUE=DATE:20261129
 SUMMARY:Christmas Kitchen and Home
 DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/christmas-kitchen-and-home/a10082166
 URL:https://www.lidl.co.uk/c/store/christmas-kitchen-and-home/a10082166
+END:VEVENT
+BEGIN:VEVENT
+UID:https%3A//www.lidl.co.uk/c/store/pick-of-the-week/a10092198@lidl-calendar
+DTSTAMP:20261119T164135Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261203
+SUMMARY:Pick of the Week
+DESCRIPTION:Lidl GB special week. See: https://www.lidl.co.uk/c/store/pick-of-the-week/a10092198
+URL:https://www.lidl.co.uk/c/store/pick-of-the-week/a10092198
 END:VEVENT
 END:VCALENDAR
